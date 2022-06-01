@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.Select;
 public class RegistrationPage extends Utils {
 
 
-  //  public void userEnterRegistrationDetails
 
     // locator for first name
     private By _firstName =By.xpath("//input[@name='FirstName']");
@@ -36,22 +35,24 @@ public class RegistrationPage extends Utils {
     private  By _confirmPassword=By.id("ConfirmPassword");
 
 
-
-
-
+//----------------------------------------------------------------------------------------------------------------------
 
     //  method for firstname
-    public void firstName() {
+    public void firstName()
+    {
         textType(_firstName, "abcd");
     }
-        //method for lastname
-    public void lastName() {
+    //method for lastname
+    public void lastName()
+    {
         textType(_lastName, "abhdfjg");
     }
+
         // select gender
     public void maleGender() {
         driver.findElement(_maleGender).click();
     }
+
         // select birthday
     public void birthDateSelect() {
         Select birthday = new Select(driver.findElement(_birthdate));
@@ -79,15 +80,14 @@ public class RegistrationPage extends Utils {
         // Confirm password
         textType(By.id("ConfirmPassword"),"123456");
 
-
     }
-
+//---------------------------------------------------------------------------------------------------------------------
     public void clickRegisterButton(){
 
         // click register button
         clickElement(By.id("register-button"));
 
     }
-
+//----------------------------------------------------------------------------------------------------------------------
 
 }

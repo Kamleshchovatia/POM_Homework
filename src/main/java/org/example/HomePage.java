@@ -19,50 +19,61 @@ public class HomePage extends Utils{
     //locator for computer
     private By _selectComputer=By.xpath("//ul[@class='top-menu notmobile']//a[normalize-space()='Computers']");
 
+    // locator for homepage logo
     private By _homepagelogo = By.xpath("//body/div[6]/div[1]/div[2]/div[1]/a[1]/img[1]");
 
+    //locator for enter Friend's email
+    private By _emailFriendDetails=By.xpath("//input[@id='FriendEmail']");
+
+    //locator for Good radio button
+    private By _goodRadioButton =By.xpath("//label[contains(text(),'Good')]");
+
+    //locator for Vote button
+    private By _voteButton =By.xpath("//button[@id='vote-poll-1']");
 
 
-    public void registerButtonOnHomepage(){
-
+    public void registerButtonOnHomepage()
+    {
         // click on register button
-    clickElement(_registrationButton);
-        //  driver.findElement(By.className("ico-register")).click();
-
+          clickElement(_registrationButton);
     }
-
+    // select currency
     public void selectCurrency()
     {
         clickElement(_selectCurrency);
     }
     public void selectCurrencyFromDollarToEuro(){
 
-        //select currency form dollar to euro
+        //select currency from dollar to euro
         Select currency = new Select(driver.findElement(By.id("customerCurrency")));
         currency.selectByVisibleText("Euro");
-
     }
-    public void verifySelectCurrencyIsEuro(){
-        //Build your own computer price in Euro
+
+    //Build your own computer price in Euro
+    public void verifySelectCurrencyIsEuro()
+    {   //Build your own computer price in Euro
         String expectedCurrency="€1032.00";
         String actualCurrency=driver.findElement(By.xpath("//span[contains(text(),'€1032.00')]")).getText();
         Assert.assertEquals(expectedCurrency,actualCurrency,"Price is not in Euro ");
 
     }
+
+    //click on computer
     public void clickOnComputer()
     {
         clickElement(_selectComputer);
     }
-
+    // enter friend's email
     public void emailFriendDetails()
     {
-        driver.findElement(By.xpath("//input[@id='FriendEmail']")).sendKeys("12345678@gmail.com");
+        driver.findElement(_emailFriendDetails).sendKeys("12345678@gmail.com");
     }
-
+    // click on send Email
     public void clickOnSendMail()
     {
         driver.findElement(By.xpath("//button[contains(text(),'Send email')]")).click();
     }
+    //verify email send to Friend
     public void verifyEmailSendToFriend()
     {
         String expectedMessage="Your message has been sent.";
@@ -78,12 +89,12 @@ public class HomePage extends Utils{
 
     //select Good radio button
     public void selectGoodRadioButton(){
-        clickElement(By.xpath("//label[contains(text(),'Good')]"));
+        clickElement(_goodRadioButton);
     }
 
     // click on vote button
     public void clickOnVoteButton(){
-        clickElement(By.xpath("//button[@id='vote-poll-1']"));
+        clickElement(_voteButton);
     }
 
     // Click on homepage logo
