@@ -22,6 +22,7 @@ public class TestSuit  extends BaseTest {
 
         // click on register button
         homePage.registerButtonOnHomepage();
+        
         //enter user firstname
         registrationPage.firstName();
         //enter last name
