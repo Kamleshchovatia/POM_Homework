@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -30,6 +31,17 @@ public class Utils extends BasePage {
     public static void textType(By by, String text) {
 
         driver.findElement(by).sendKeys(text);
+    }
+
+    public static void selectByValue(By by, String value){
+        Select dropdown = new Select(driver.findElement(by));
+        dropdown.selectByValue(value);
+    }
+
+    public static void selectByVisibleText(By by,String value){
+        Select dropdown = new Select(driver.findElement(by));
+        dropdown.selectByVisibleText(value);
+
     }
 
     // -------------------------------------------------------------------------------------
@@ -65,11 +77,12 @@ public class Utils extends BasePage {
         TakesScreenshot scrShot = ((TakesScreenshot) driver);
 
         // call getScreenshot as method to create image file
-        File Scrshot = scrShot.getScreenshotAs(OutputType.FILE);
+        File scrFile = scrShot.getScreenshotAs(OutputType.FILE);
 
         // copy file at destination
+
         try {
-            FileUtils.copyFile(Scrshot, new File("ScreenShots" + a + ".png"));
+            FileUtils.copyFile(scrFile, new File("ScreenShots\\" + a + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
