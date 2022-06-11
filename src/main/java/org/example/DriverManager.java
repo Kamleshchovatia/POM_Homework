@@ -52,6 +52,7 @@ public class DriverManager extends Utils {
                 caps.setCapability("browser_version", "latest");
                 caps.setCapability("browserstack.local", "false");
                 caps.setCapability("browserstack.selenium_version", "4.1.0");
+                
             }if(browserName.equalsIgnoreCase("edge")){
                 System.out.println("your test cases running in Edge browser");
                 caps.setCapability("os", "Windows");
