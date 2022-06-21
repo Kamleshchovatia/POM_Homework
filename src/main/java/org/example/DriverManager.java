@@ -13,16 +13,17 @@ import java.util.HashMap;
 
 public class DriverManager extends Utils {
 
-    LoadProp loadPage = new LoadProp();
+    LoadProp loadProp = new LoadProp();
     DesiredCapabilities caps = new DesiredCapabilities();
 
-    public final String USERNAME = loadPage.getProperty("bsUsername");
-    public final String AUTOMATE_KEY = loadPage.getProperty("bsAccessKey");
+    public final String USERNAME = loadProp.getProperty("bsUsername");
+    public final String AUTOMATE_KEY = loadProp.getProperty("bsAccessKey");
     public final String BrowserstackURL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
-    boolean cloud= Boolean.parseBoolean(System.getProperty("cloud"));
+    boolean cloud = Boolean.parseBoolean(System.getProperty("cloud"));
 
-
-    String browserName =System.getProperty("browser");
+    // select the browser to run the test
+   // String browserName = System.getProperty("Chrome");
+    String browserName = "chrome";
 
     public void openBrowser() {
 
@@ -31,11 +32,13 @@ public class DriverManager extends Utils {
 
         if (cloud) {
 
-            System.out.println(" running in cloud");
+            System.out.println("Running in cloud");
 
-            //applying conditional loop for different browser options
+            // applying conditional loop for different browser options
+
+            // Chrome browser
+
             if (browserName.equalsIgnoreCase("Chrome")) {
-
                 caps.setCapability("browserName", "Chrome");
                 caps.setCapability("browserVersion", "latest");
                 HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
@@ -43,8 +46,9 @@ public class DriverManager extends Utils {
                 browserstackOptions.put("osVersion", "10");
                 caps.setCapability("bstack:options", browserstackOptions);
 
-            } if(browserName.equalsIgnoreCase("firefox")){
-
+                // firefox browser
+            }
+            if (browserName.equalsIgnoreCase("firefox")) {
                 System.out.println("Your test cases are running in Firefox browser");
                 caps.setCapability("os", "Windows");
                 caps.setCapability("os_version", "10");
@@ -52,8 +56,10 @@ public class DriverManager extends Utils {
                 caps.setCapability("browser_version", "latest");
                 caps.setCapability("browserstack.local", "false");
                 caps.setCapability("browserstack.selenium_version", "4.1.0");
-                
-            }if(browserName.equalsIgnoreCase("edge")){
+
+                // edge browser
+            }
+            if (browserName.equalsIgnoreCase("edge")) {
                 System.out.println("your test cases running in Edge browser");
                 caps.setCapability("os", "Windows");
                 caps.setCapability("os_version", "10");
@@ -61,48 +67,47 @@ public class DriverManager extends Utils {
                 caps.setCapability("browser_version", "latest");
                 caps.setCapability("browserstack.local", "false");
                 caps.setCapability("browserstack.selenium_version", "4.1.0");
-            }
-            else
-            {
+            } else {
                 System.out.println("Wrong browser name OR Connection issue with browser");
             }
 
             try {
-                driver = new RemoteWebDriver(new URL(BrowserstackURL),caps);
+                driver = new RemoteWebDriver(new URL(BrowserstackURL), caps);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
 
-
-        }else
-        {
-            //this wi
-            if (browserName.equalsIgnoreCase("Chrome")) {
-
-            System.setProperty("webdriver.chrome.driver", "src/test/java/drivers/chromedriver.exe");
-            // Chrome browser
-            driver = new ChromeDriver();
-
-        } else if (browserName.equalsIgnoreCase("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "src/test/java/drivers/geckodriver.exe");
-            driver = new FirefoxDriver(); // firefox browser
-
-        } else if (browserName.equalsIgnoreCase("Edge")) {
-            System.setProperty("webdriver.edge.driver", "src/test/java/drivers/msedgedriver.exe");
-            driver = new EdgeDriver(); // edge browser
-
         } else {
 
-            System.out.println("Either your browser name is wrong or not provided " + browserName);
-        }
+            //this will run if cloud false(locally)
+            System.out.println("Running locally....");
 
+            if (browserName.equalsIgnoreCase("Chrome")) {
+
+                System.setProperty("webdriver.chrome.driver", "src/test/java/drivers/chromedriver.exe");
+                // Chrome browser
+                driver = new ChromeDriver();
+
+            } else if (browserName.equalsIgnoreCase("firefox")) {
+                System.setProperty("webdriver.gecko.driver", "src/test/java/drivers/geckodriver.exe");
+                driver = new FirefoxDriver(); // firefox browser
+
+            } else if (browserName.equalsIgnoreCase("Edge")) {
+                System.setProperty("webdriver.edge.driver", "src/test/java/drivers/msedgedriver.exe");
+                driver = new EdgeDriver(); // edge browser
+
+            } else {
+
+                System.out.println("Either your browser name is wrong or not provided " + browserName);
             }
 
+}
 
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-            driver.manage().window().maximize();
-            driver.get(loadPage.getProperty("url"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().window().maximize();
+        driver.get(loadProp.getProperty("url"));
         }
+
 
 
     public void closeBrowser() {

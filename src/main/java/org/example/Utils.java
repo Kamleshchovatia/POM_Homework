@@ -33,12 +33,12 @@ public class Utils extends BasePage {
         driver.findElement(by).sendKeys(text);
     }
 
-    public static void selectByValue(By by, String value){
+    public static void selectByValue(By by, String value) {
         Select dropdown = new Select(driver.findElement(by));
         dropdown.selectByValue(value);
     }
 
-    public static void selectByVisibleText(By by,String value){
+    public static void selectByVisibleText(By by, String value) {
         Select dropdown = new Select(driver.findElement(by));
         dropdown.selectByVisibleText(value);
 
@@ -88,14 +88,15 @@ public class Utils extends BasePage {
         }
 
     }
-        //Method for alert GetText and Accept
-        public static void alertMethodForGetText (){
+
+    //Method for alert GetText and Accept
+    public static void alertMethodForGetText() {
 
         //switching to alert
-        Alert alert =driver.switchTo().alert();
+        Alert alert = driver.switchTo().alert();
 
         // capturing alert message
-        String alertMessage=driver.switchTo().alert().getText();
+        String alertMessage = driver.switchTo().alert().getText();
 
         // Alert message display
         System.out.println(alertMessage);
@@ -109,7 +110,7 @@ public class Utils extends BasePage {
 
     // Method for click on ok button
 
-    public static void alertMethodForAccept(){
+    public static void alertMethodForAccept() {
 
         // switching to alert
         Alert alert = driver.switchTo().alert();
@@ -125,17 +126,16 @@ public class Utils extends BasePage {
     }
 
     //Method for Assert equals URL
-    public static void assertVerificationWithUrl(String url, String errorMessage ){
+    public static void assertVerificationWithUrl(String url, String errorMessage) {
 
-        String expectedMessage= url;
+        String expectedMessage = url;
         String actualMessage = driver.getCurrentUrl();
-        Assert.assertEquals(expectedMessage,actualMessage,"errorMessage");
+        Assert.assertEquals(expectedMessage, actualMessage, "errorMessage");
     }
 
-
-
-
-
+    public static void verifyCurrentUrl(String url) {
+        driver.getCurrentUrl().equals(url);
+    }
 
 
 }

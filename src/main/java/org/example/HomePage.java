@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -157,6 +156,16 @@ public class HomePage extends Utils {
 
         clickElement(_clickOnSearchButton);
     }
+
+  //  public void verifyCurrentUrl(By by){
+    //    driver.getCurrentUrl("");
+  //  }
+
+
+      public void clickOnCategoryList(String category_name){
+        clickElement(By.linkText(category_name));
+
+      }
 
 
 //    public void checkYourCommentLastInTheList(){
