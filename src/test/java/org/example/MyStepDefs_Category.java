@@ -14,11 +14,13 @@ public class MyStepDefs_Category {
        homePage.verificationUserOnHomePage();
     }
 
+
     @When("I click on {string} link from top menu header")
     public void i_click_on_link_from_top_menu_header(String category_name) {
         // Write code here that turns the phrase above into concrete actions
        homePage.clickOnCategoryList(category_name);
     }
+    
 
 
     @Then("I should able to successfully navigate to related {string} category page successfully")
